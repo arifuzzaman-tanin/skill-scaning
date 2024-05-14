@@ -1,0 +1,14 @@
+* {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  color: black;
+  letter-spacing: 1px;
+}
+
+.inline-icon {
+  display: inline-flex;
+  vertical-align: top;
+}
+
+.cursor-pointer{
+  cursor: pointer;
+}

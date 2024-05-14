@@ -1,0 +1,45 @@
+[data-icon="check"]{
+    font-size: 20px; 
+    padding-top: 5px;
+}
+
+[data-icon="check"] path {
+    color: blue !important;
+}
+
+[data-icon="close"]{
+    font-size: 20px; 
+    padding-top: 5px;
+}
+[data-icon="close"] path {
+    color: red !important;
+}
+
+.bg-score-card{
+    background-color: #e7f3fd !important;
+}
+
+.skill-set-div-scroll{
+    overflow: auto;
+    max-height: 80vh;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+    z-index: 999; /* Ensure the overlay is on top of everything */
+}
+
+.resume-status{
+    background-color: white;
+}
+
+.resume-status span{
+    padding: 5px;
+    margin: 5px;
+    white-space: nowrap;
+}
