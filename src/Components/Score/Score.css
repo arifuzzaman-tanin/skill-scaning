@@ -34,12 +34,21 @@
     z-index: 999; /* Ensure the overlay is on top of everything */
 }
 
-.resume-status{
+.resume-status {
     background-color: white;
+    text-align: center;
 }
 
-.resume-status span{
+.resume-status span {
     padding: 5px;
     margin: 5px;
     white-space: nowrap;
+}
+
+/* Media query for mobile devices */
+@media only screen and (max-width: 600px) {
+    .resume-status span {
+        display: block;
+        width: 100%;
+    }
 }
