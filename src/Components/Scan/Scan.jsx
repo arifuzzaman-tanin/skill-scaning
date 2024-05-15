@@ -39,15 +39,20 @@ function Scan() {
 
     const handleResumeChange = (event) => {
         const updatedResumeText = event.target.value;
-        setResumeText(updatedResumeText);
-        updateSubmitButtonState(updatedResumeText, jobDescriptionText);
+        if (updatedResumeText.length >= 50) {
+            setResumeText(updatedResumeText);
+            updateSubmitButtonState(updatedResumeText, jobDescriptionText);
+        }
     };
 
     const handleJobDescriptionChange = (event) => {
         const updatedJobDescriptionText = event.target.value;
-        setJobDescriptionText(updatedJobDescriptionText);
-        updateSubmitButtonState(resumeText, updatedJobDescriptionText);
+        if (updatedJobDescriptionText.length >= 50) {
+            setJobDescriptionText(updatedJobDescriptionText);
+            updateSubmitButtonState(resumeText, updatedJobDescriptionText);
+        }
     };
+
 
     const updateSubmitButtonState = (resume, jobDescription) => {
         setIsSubmitDisabled(!(resume.trim() && jobDescription.trim()));
