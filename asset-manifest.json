@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/skill-scaning/static/css/main.ec3a5fde.css",
-    "main.js": "/skill-scaning/static/js/main.8855a12e.js",
+    "main.js": "/skill-scaning/static/js/main.3a168648.js",
     "static/js/453.05f8dac0.chunk.js": "/skill-scaning/static/js/453.05f8dac0.chunk.js",
     "index.html": "/skill-scaning/index.html",
     "main.ec3a5fde.css.map": "/skill-scaning/static/css/main.ec3a5fde.css.map",
-    "main.8855a12e.js.map": "/skill-scaning/static/js/main.8855a12e.js.map",
+    "main.3a168648.js.map": "/skill-scaning/static/js/main.3a168648.js.map",
     "453.05f8dac0.chunk.js.map": "/skill-scaning/static/js/453.05f8dac0.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.ec3a5fde.css",
-    "static/js/main.8855a12e.js"
+    "static/js/main.3a168648.js"
   ]
 }
