@@ -40,6 +40,7 @@ function Scan() {
     const handleResumeChange = (event) => {
         const updatedResumeText = event.target.value;
         setResumeText(updatedResumeText);
+        setIsSubmitDisabled(true)
         if (updatedResumeText.length >= 50) {
             updateSubmitButtonState(updatedResumeText, jobDescriptionText);
         }
@@ -48,6 +49,7 @@ function Scan() {
     const handleJobDescriptionChange = (event) => {
         const updatedJobDescriptionText = event.target.value;
         setJobDescriptionText(updatedJobDescriptionText);
+        setIsSubmitDisabled(true)
         if (updatedJobDescriptionText.length >= 50) {
             updateSubmitButtonState(resumeText, updatedJobDescriptionText);
         }
