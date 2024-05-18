@@ -10,7 +10,7 @@ function App() {
                   <p className='fs-5 ps-3 fw-bold'>Vasding skill scanning!</p>
               </div>
               <div className='col-6 pt-2'>
-                  <p className='float-end pe-3 cursor-pointer'>Login | Register</p>
+                  {/* <p className='float-end pe-3 cursor-pointer'>Login | Register</p> */}
               </div>
           </div>
           <Scan/>

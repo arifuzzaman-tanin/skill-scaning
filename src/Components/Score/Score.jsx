@@ -1,13 +1,17 @@
-import { CheckOutlined, CloseOutlined, ArrowLeftOutlined } from '@ant-design/icons';
-import { Progress } from 'antd';
+import { useState } from 'react';
+import { CheckOutlined, CloseOutlined, ArrowLeftOutlined, CopyOutlined } from '@ant-design/icons';
+import { Progress, notification } from 'antd';
 import '../../Components/Score/Score.css'
 const twoColors = {
     '0%': 'red',
     '100%': '#0D6EFD',
 };
 
-function Score({ scoreData, onBackToScan }) {
-    
+
+function Score({ scoreData, resumeText, jobDescriptionText, onBackToScan }) {
+
+    const [isCheckedQuantitativeAchievements, setQuantitativeAchievements] = useState(false);
+
     const getStatusColor = (status) => {
         switch (status) {
             case 'Below Average':
@@ -22,6 +26,58 @@ function Score({ scoreData, onBackToScan }) {
                 return 'bg-primary text-white fw-bold';
             default:
                 return '';
+        }
+    };
+
+    const openNotificationWithIcon = () => {
+        notification.open({
+            message: 'GPT command copied',
+            description:
+                'Now paste it into ChatGPT or other GPT tools to add missing skills and keywords to your resume.',
+            onClick: () => {
+                console.log('Notification Clicked!');
+            },
+        });
+    };
+
+    const handleQuantitativeAchievementsCheckboxOnChange = (event) => {
+        setQuantitativeAchievements(event.target.checked)
+    }
+
+    const copyToClipboard = async () => {
+        try {
+
+            let resume = "The section below is my resume:\n \n"
+            resume = resume + resumeText + "\n \n"
+
+            let job_description = "The section below is the job description that I want to apply:\n \n Job Description Section Start\n \n"
+            job_description = job_description + jobDescriptionText + "\n \n"
+            job_description = job_description + "Job Description Section End\n \n"
+
+            let missing_skills = 'Comma-separated skills which are missing in the resume:\n\n'
+            missing_skills = missing_skills + scoreData.comma_separated_missing_skills
+
+            let action = '\n\nNow take the following actions.\n\n'
+
+            if(isCheckedQuantitativeAchievements){
+                action = action + '1. Add the missing skills provided in the job description to the resume.\n'
+                action = action + '2. Ensure that no missing skills are overlooked in the resume; if necessary, modify the resume.\n'
+                action = action + '3. Add quantitative achievements in my work experiences.\n'
+                action = action + '4. Provide a complete and final resume that includes all the missing keywords/skills and all sections of the resume.\n'
+            }
+            else{
+                action = action + '1. Add the missing skills provided in the job description to the resume.\n'
+            action = action + '2. Ensure that no missing skills are overlooked in the resume; if necessary, modify the resume.\n'
+            action = action + '3. Provide a complete and final resume that includes all the missing keywords/skills and all sections of the resume.\n'
+            }
+            
+
+            await navigator.clipboard.writeText(resume + job_description + missing_skills + action);
+            //   alert('Text copied to clipboard!');
+            openNotificationWithIcon()
+        } catch (err) {
+            console.error('Failed to copy: ', err);
+            alert('Failed to copy text to clipboard.');
         }
     };
 
@@ -65,6 +121,27 @@ function Score({ scoreData, onBackToScan }) {
 
                         <div className='mt-3 mb-3 d-flex align-items-center justify-content-center'>
                             <p className='fs-4 fw-bold cursor-pointer' onClick={onBackToScan} ><ArrowLeftOutlined className='me-3' />Back to scan</p>
+                        </div>
+
+                        <div className='mt-3 mb-3'>
+                            <div className='row'>
+                                <div className='col-sm-6'>
+                                    <div className="form-check">
+                                        <input className="form-check-input" type="checkbox" checked={isCheckedQuantitativeAchievements} onChange={handleQuantitativeAchievementsCheckboxOnChange} />
+                                        <label className="form-check-label">
+                                            Add quantitative achievements
+                                        </label>
+                                    </div>
+                                </div>
+                                <div className='col-sm-6'>
+                                    <p className='fs-6 fw-bold cursor-pointer' onClick={copyToClipboard}><CopyOutlined className='me-1' />Copy</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div className='mt-3 mb-3 d-flex align-items-center justify-content-center'>
+                            <p className='text-small'>
+                                After copying, then paste it into ChatGPT or other GPT tools to add missing skills and keywords to your resume.
+                            </p>
                         </div>
                     </div>
                     <div className="col-md-6">

@@ -13,7 +13,8 @@ const createAxiosInstance = (config: AxiosConfig): AxiosInstance => {
 
 // Default configuration
 const defaultConfig: AxiosConfig = {
-    baseURL: "http://arifuzzamantanin.pythonanywhere.com",
+     baseURL: "http://arifuzzamantanin.pythonanywhere.com",
+    //baseURL: "http://127.0.0.1:5000",
     headers: {
         "Content-Type": "application/json"
     }

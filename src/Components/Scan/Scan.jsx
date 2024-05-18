@@ -92,7 +92,7 @@ function Scan() {
             )}
             {isLoading && <Spin className='loader' indicator={antIcon} />}
             {isHiddenScan && (
-                scoreData && <Score scoreData={scoreData} onBackToScan={handleBackToScan} />
+                scoreData && <Score scoreData={scoreData} resumeText={resumeText} jobDescriptionText = {jobDescriptionText} onBackToScan={handleBackToScan} />
             )}
         </div>
     );
