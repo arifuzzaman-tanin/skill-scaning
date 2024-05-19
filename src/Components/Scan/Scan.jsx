@@ -1,10 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ScoreService from '../../Services/Score/ScoreService';
 import PropTypes from 'prop-types';
 import './Scan.css'; // Adjust path according to your project structure
 import Score from '../Score/Score'; // Import the Score component
-import { RightOutlined } from '@ant-design/icons';
-import { LoadingOutlined } from '@ant-design/icons';
+import { RightOutlined, LoadingOutlined } from '@ant-design/icons';
 import { Spin } from 'antd';
 
 const antIcon = <LoadingOutlined style={{ fontSize: 50 }} spin />;
@@ -16,6 +15,51 @@ function Scan() {
     const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
     const [scoreData, setScoreData] = useState(null); // State to hold score data
     const [isLoading, setIsLoading] = useState(false); // State to track loading state
+
+    useEffect(() => {
+        const checkDevTools = () => {
+            const threshold = 100; // Threshold to consider if the dev tools are opened
+            const widthThreshold = window.outerWidth - window.innerWidth > threshold;
+            const heightThreshold = window.outerHeight - window.innerHeight > threshold;
+
+            if (
+                (window.Firebug && window.Firebug.chrome && window.Firebug.chrome.isInitialized) ||
+                widthThreshold ||
+                heightThreshold
+            ) {
+                return true;
+            } else {
+                return false;
+            }
+        };
+
+        const redirectToWarningPage = () => {
+            window.location.href = '/skill-scaning/403.html'; // Replace with your desired URL
+        };
+
+        // Check if devtools are already open on load
+        if (checkDevTools()) {
+            redirectToWarningPage();
+        }
+
+        // Store the state in session storage
+        sessionStorage.setItem('devtools-open', checkDevTools());
+
+        const handleDevToolsChange = () => {
+            if (checkDevTools()) {
+                sessionStorage.setItem('devtools-open', true);
+                redirectToWarningPage();
+            } else {
+                sessionStorage.setItem('devtools-open', false);
+            }
+        };
+
+        const interval = setInterval(handleDevToolsChange, 500);
+
+        return () => clearInterval(interval);
+    }, []);
+
+
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -92,7 +136,7 @@ function Scan() {
             )}
             {isLoading && <Spin className='loader' indicator={antIcon} />}
             {isHiddenScan && (
-                scoreData && <Score scoreData={scoreData} resumeText={resumeText} jobDescriptionText = {jobDescriptionText} onBackToScan={handleBackToScan} />
+                scoreData && <Score scoreData={scoreData} resumeText={resumeText} jobDescriptionText={jobDescriptionText} onBackToScan={handleBackToScan} />
             )}
         </div>
     );
