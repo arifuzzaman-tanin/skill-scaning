@@ -16,48 +16,48 @@ function Scan() {
     const [scoreData, setScoreData] = useState(null); // State to hold score data
     const [isLoading, setIsLoading] = useState(false); // State to track loading state
 
-    useEffect(() => {
-        const checkDevTools = () => {
-            const threshold = 100; // Threshold to consider if the dev tools are opened
-            const widthThreshold = window.outerWidth - window.innerWidth > threshold;
-            const heightThreshold = window.outerHeight - window.innerHeight > threshold;
+    // useEffect(() => {
+    //     const checkDevTools = () => {
+    //         const threshold = 100; // Threshold to consider if the dev tools are opened
+    //         const widthThreshold = window.outerWidth - window.innerWidth > threshold;
+    //         const heightThreshold = window.outerHeight - window.innerHeight > threshold;
 
-            if (
-                (window.Firebug && window.Firebug.chrome && window.Firebug.chrome.isInitialized) ||
-                widthThreshold ||
-                heightThreshold
-            ) {
-                return true;
-            } else {
-                return false;
-            }
-        };
+    //         if (
+    //             (window.Firebug && window.Firebug.chrome && window.Firebug.chrome.isInitialized) ||
+    //             widthThreshold ||
+    //             heightThreshold
+    //         ) {
+    //             return true;
+    //         } else {
+    //             return false;
+    //         }
+    //     };
 
-        const redirectToWarningPage = () => {
-            window.location.href = '/skill-scaning/403.html'; // Replace with your desired URL
-        };
+    //     const redirectToWarningPage = () => {
+    //         window.location.href = '/skill-scaning/403.html'; // Replace with your desired URL
+    //     };
 
-        // Check if devtools are already open on load
-        if (checkDevTools()) {
-            redirectToWarningPage();
-        }
+    //     // Check if devtools are already open on load
+    //     if (checkDevTools()) {
+    //         redirectToWarningPage();
+    //     }
 
-        // Store the state in session storage
-        sessionStorage.setItem('devtools-open', checkDevTools());
+    //     // Store the state in session storage
+    //     sessionStorage.setItem('devtools-open', checkDevTools());
 
-        const handleDevToolsChange = () => {
-            if (checkDevTools()) {
-                sessionStorage.setItem('devtools-open', true);
-                redirectToWarningPage();
-            } else {
-                sessionStorage.setItem('devtools-open', false);
-            }
-        };
+    //     const handleDevToolsChange = () => {
+    //         if (checkDevTools()) {
+    //             sessionStorage.setItem('devtools-open', true);
+    //             redirectToWarningPage();
+    //         } else {
+    //             sessionStorage.setItem('devtools-open', false);
+    //         }
+    //     };
 
-        const interval = setInterval(handleDevToolsChange, 500);
+    //     const interval = setInterval(handleDevToolsChange, 500);
 
-        return () => clearInterval(interval);
-    }, []);
+    //     return () => clearInterval(interval);
+    // }, []);
 
 
 
